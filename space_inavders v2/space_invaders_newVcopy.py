@@ -1,5 +1,6 @@
 import pygame
 
+
 screen = pygame.display.set_mode((1600,900))
 #screen = pygame.display.set_mode((1500,800))
 
@@ -8,18 +9,40 @@ player1=pygame.image.load('images/player1.bmp').convert()
 projectile1=pygame.image.load('images/fireball1.gif').convert()
 player1 = pygame.transform.scale(player1, (50, 50))
 projectile1 = pygame.transform.scale(projectile1, (20, 20))
+
+
+
+
 FPS=60
 fpsClock=pygame.time.Clock()
 
 
 
 class space_ship:
+    def __init__(self):
+        # Initialization of the Strings
+        self.String1 ="Hello"
+        self.String2 ="World"
 
-    def space_ship_movement():
+    def shoot_proj(self):
+        cycle=0
+        ball_position = projectile1.get_rect(midbottom=(700,800))
+        screen.blit(projectile1, ball_position)
+        
+        while True:
+            screen.blit(background, ball_position, ball_position)
+            ball_position = ball_position.move(0, -10)
+            screen.blit(projectile1, ball_position) 
+            pygame.display.update()
+            pygame.time.delay(30)
+            cycle+=1
+            if cycle==100:
+                break
+
+    def space_ship_movement(self):
         spritex=700
         spritey=800
-        proj_x=spritex
-        proj_y=spritey
+        
         speed=2
 
         WHITE=(255, 255, 255)
@@ -47,10 +70,7 @@ class space_ship:
             if keys_pressed[pygame.K_DOWN]:
                 spritey += speed
 
-            if keys_pressed[pygame.K_z]:
-                screen.blit(projectile1, (proj_x, proj_y))
-                proj_y -= 10
-                pygame.time.delay(100)
+            
                 
                 
                 
@@ -72,6 +92,17 @@ class space_ship:
                     if event.key == ord('q'):
                         pygame.quit()
                         main = False 
+                    if event.key == event.key == ord('z'):
+                        self.shoot_proj()
+                        
 
         
 
+#class shoot_projectile:
+#    #def __init__(self,spritex,spritey,vel):
+#    #    self.spritex=spritex
+#    #    self.spritey=spritey
+#    #    self.vel=vel
+    
+
+#proj_cor = shoot_projectile(500,500,2)
